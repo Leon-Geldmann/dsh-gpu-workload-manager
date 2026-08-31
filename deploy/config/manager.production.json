@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "startup": {
+    "mode": "manual",
+    "initialState": "UNLOADED",
+    "autoLoad": false,
+    "restoreLastModel": false
+  },
+  "listen": {
+    "host": "0.0.0.0",
+    "port": 8080,
+    "addressFamily": "ipv4"
+  },
+  "networkPolicy": {
+    "trustedIpv4Cidrs": [
+      "192.168.3.0/24"
+    ],
+    "enforcement": [
+      "ufw",
+      "preflight"
+    ],
+    "ipv6": false
+  },
+  "child": {
+    "host": "127.0.0.1",
+    "port": 18080,
+    "approvedDevice": "Vulkan0",
+    "deviceMatcher": "^Vulkan0: AMD Radeon RX 7900 XTX \\(RADV NAVI31\\)$",
+    "parallel": 1,
+    "gpuLayers": "all",
+    "flashAttention": true,
+    "kvCache": "q8_0"
+  },
+  "catalogPath": "/etc/qwen38-workload-manager/models.production.json",
+  "artifactIntegrity": {
+    "mode": "strict",
+    "trustedOwnerUids": [
+      0,
+      1001
+    ],
+    "maximumGroupWritableExceptionTtlMs": 86400000
+  },
+  "credentials": {
+    "inference": {
+      "systemdName": "inference.key",
+      "sourcePath": "/etc/qwen38-workload-manager/credentials/inference.key",
+      "requiredMode": "0600"
+    },
+    "management": {
+      "systemdName": "management.key",
+      "sourcePath": "/etc/qwen38-workload-manager/credentials/management.key",
+      "requiredMode": "0600"
+    }
+  },
+  "paths": {
+    "runtimeDirectory": "/run/qwen38-workload-manager",
+    "stateDirectory": "/var/lib/qwen38-workload-manager",
+    "cacheDirectory": "/var/cache/qwen38-workload-manager",
+    "logDirectory": "/var/log/qwen38-workload-manager"
+  }
+}

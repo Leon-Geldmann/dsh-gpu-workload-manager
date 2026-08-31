@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "binary": {
+    "path": "/home/agentops/apps/qwen38/build-vulkan/bin/llama-server",
+    "bytes": 61287200,
+    "sha256": "fab17eebe2dfbf7d908beed09cea3b98ebc9e001ba767758262412bf9202980d"
+  },
+  "models": [
+    {
+      "id": "qwen3.8-27b",
+      "path": "/data/ai/models/llm/qwen3.8-27b/base/unsloth-q5_k_m/Qwen3.8-27B-Q5_K_M.gguf",
+      "bytes": 19834055648,
+      "sha256": "07deb7fa91bf751d3000774fe5bb8afae5ffb41255fd19980147468052e07177",
+      "contextSize": 65536,
+      "mtp": 2
+    },
+    {
+      "id": "qwen3.8-27b-uncensored",
+      "path": "/data/ai/models/llm/qwen3.8-27b/uncensored/jonathancoletti-q5_k_m/Qwen3.8-27B-Uncensored-Q5_K_M.gguf",
+      "bytes": 19535701408,
+      "sha256": "24780644a95f759a9aeeb228c3d852028f2fd40ce0b74d68134246ec4a959547",
+      "contextSize": 65536,
+      "mtp": 2
+    },
+    {
+      "id": "qwen3.8-27b-q4",
+      "path": "/data/ai/models/llm/qwen3.8-27b/base/unsloth-q4_k_m/Qwen3.8-27B-Q4_K_M.gguf",
+      "bytes": 17106775008,
+      "sha256": "7e78da5d7e3ae28d178121f58646953305f3e5bd3cb46f4a75584e8b6c6fe169",
+      "contextSize": 131072,
+      "mtp": 5
+    },
+    {
+      "id": "qwen3.8-27b-uncensored-q4",
+      "path": "/data/ai/models/llm/qwen3.8-27b/uncensored-q4/jonathancoletti-q4_k_m/Qwen3.8-27B-Uncensored-Q4_K_M.gguf",
+      "bytes": 16810714528,
+      "sha256": "4c5e2db039e9325ac7724c8846c71356a24ad1cdfa28002d73ecb6be645f9675",
+      "contextSize": 131072,
+      "mtp": 2
+    }
+  ]
+}
