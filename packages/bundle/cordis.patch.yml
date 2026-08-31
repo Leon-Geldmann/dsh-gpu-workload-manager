@@ -1,0 +1,19 @@
+# One patch ships to both machines. The launcher must set the role explicitly;
+# no operating-system or hostname guessing is allowed.
+
+- id: ui-model-selection
+  name: '@deepseek-ai/dsh-client-ui-model-selection'
+  disabled: true
+
+- insert:
+    - id: gpu-workload-manager
+      name: '@local/dsh-gpu-workload-manager'
+      config:
+        role: !!js process.env.GPU_WORKLOAD_ROLE
+        managerUrl: !!js >-
+          process.env.GPU_WORKLOAD_MANAGER_URL ?? (process.env.GPU_WORKLOAD_ROLE === 'server' ? 'http://127.0.0.1:8080' : '')
+        managementCredentialRef: GPU_MANAGER_KEY
+
+    - id: gpu-workload-model-selection
+      name: '@local/dsh-gpu-model-selection'
+      disabled: false
