@@ -1,0 +1,8 @@
+.worktrees/
+.superpowers/
+node_modules/
+packages/dsh-plugin/lib/
+packages/dsh-model-selection/lib/
+dist/
+coverage/
+*.tgz
