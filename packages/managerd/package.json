@@ -1,0 +1,14 @@
+{
+  "name": "@local/gpu-workload-managerd",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.ts",
+  "scripts": {
+    "build": "tsc --noEmit -p tsconfig.json && tsdown -c tsdown.config.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@local/gpu-workload-core": "workspace:*"
+  }
+}

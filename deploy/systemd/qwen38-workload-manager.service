@@ -1,0 +1,73 @@
+[Unit]
+Description=Qwen3.8 GPU Workload Manager
+Wants=network-online.target
+After=network-online.target
+ConditionFileIsExecutable=/opt/qwen38-workload-manager/current/node-v22/bin/node
+ConditionFileNotEmpty=/opt/qwen38-workload-manager/current/dist/managerd.js
+ConditionFileNotEmpty=/etc/qwen38-workload-manager/manager.production.json
+ConditionFileNotEmpty=/etc/qwen38-workload-manager/models.production.json
+
+[Service]
+Type=exec
+User=agentops
+Group=agentops
+SupplementaryGroups=aiops video render
+WorkingDirectory=/opt/qwen38-workload-manager/current
+LoadCredential=inference.key:/etc/qwen38-workload-manager/credentials/inference.key
+LoadCredential=management.key:/etc/qwen38-workload-manager/credentials/management.key
+ExecStart=/opt/qwen38-workload-manager/current/node-v22/bin/node /opt/qwen38-workload-manager/current/dist/managerd.js --manager-config /etc/qwen38-workload-manager/manager.production.json --models-config /etc/qwen38-workload-manager/models.production.json
+Restart=on-failure
+RestartSec=5s
+KillMode=control-group
+KillSignal=SIGTERM
+TimeoutStopSec=75s
+UMask=0077
+
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=read-only
+PrivateTmp=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+ProtectHostname=yes
+ProtectClock=yes
+ProtectProc=invisible
+ProcSubset=pid
+RestrictSUIDSGID=yes
+LockPersonality=yes
+RestrictRealtime=yes
+RestrictNamespaces=yes
+SystemCallArchitectures=native
+RemoveIPC=yes
+KeyringMode=private
+CapabilityBoundingSet=
+AmbientCapabilities=
+RestrictAddressFamilies=AF_UNIX AF_INET
+DevicePolicy=closed
+DeviceAllow=/dev/dri/card1 rw
+DeviceAllow=/dev/dri/renderD128 rw
+IPAddressDeny=any
+IPAddressAllow=localhost
+IPAddressAllow=192.168.3.0/24
+
+RuntimeDirectory=qwen38-workload-manager
+RuntimeDirectoryMode=0700
+StateDirectory=qwen38-workload-manager
+StateDirectoryMode=0700
+CacheDirectory=qwen38-workload-manager
+CacheDirectoryMode=0700
+LogsDirectory=qwen38-workload-manager
+LogsDirectoryMode=0700
+ReadOnlyPaths=/opt/qwen38-workload-manager/current
+ReadOnlyPaths=/etc/qwen38-workload-manager
+ReadOnlyPaths=/home/agentops/apps/qwen38/build-vulkan
+ReadOnlyPaths=/data/ai/models/llm/qwen3.8-27b
+ReadWritePaths=/run/qwen38-workload-manager
+ReadWritePaths=/var/lib/qwen38-workload-manager
+ReadWritePaths=/var/cache/qwen38-workload-manager
+ReadWritePaths=/var/log/qwen38-workload-manager
+
+[Install]
+WantedBy=multi-user.target
